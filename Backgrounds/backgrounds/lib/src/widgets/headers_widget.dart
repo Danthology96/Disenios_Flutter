@@ -225,14 +225,15 @@ class _WaveHeaderPainter extends CustomPainter {
     //Dibuja con el path y con el lapiz
     //moveTO es para moverse a la posición deseada
     //lineTo es para dibujar hasta la ubicación seleccionada
-    path.lineTo(0, size.height * 0.3);
+    path.moveTo(0, size.height);
+    path.lineTo(0, size.height * 0.7);
     //Primeras coordenadas son donde debe pasar la curvatura, y las segundas
     //coordenadas es el punto final
     path.quadraticBezierTo(
-        size.width / 4, size.height * 0.4, size.width / 2, size.height * 0.3);
-    path.quadraticBezierTo(size.width - (size.width / 4), size.height * 0.2,
-        size.width, size.height * 0.3);
-    path.lineTo(size.width, 0);
+        size.width / 4, size.height * 0.6, size.width / 2, size.height * 0.7);
+    path.quadraticBezierTo(
+        size.width * 3 / 4, size.height * 0.8, size.width, size.height * 0.7);
+    path.lineTo(size.width, size.height);
     canvas.drawPath(path, paint);
   }
 
