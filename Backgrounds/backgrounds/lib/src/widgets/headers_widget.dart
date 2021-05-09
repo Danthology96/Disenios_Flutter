@@ -242,3 +242,64 @@ class _WaveHeaderPainter extends CustomPainter {
     return true;
   }
 }
+
+class GradientHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _GradientHeaderPainter(),
+      ),
+    );
+  }
+}
+
+class _GradientHeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Rect rect =
+        new Rect.fromCircle(center: Offset(size.width / 2, 0), radius: 180);
+    final Gradient gradient = new LinearGradient(
+      colors: [
+        Color(0xff6D05E8),
+        Color(0xffC012FF),
+        Color(0xff6D05E8),
+      ],
+      stops: [
+        0.0,
+        0.5,
+        1.0,
+      ],
+    );
+
+    //El lapiz que se usará para pintar
+    final paint = Paint()..shader = gradient.createShader(rect);
+
+    paint.color = Colors.red;
+    paint.style =
+        PaintingStyle.fill; //.fill es para rellenar ,stroke para bordes
+    paint.strokeWidth = 2.0;
+
+    final path = Path();
+    //Dibuja con el path y con el lapiz
+    //moveTO es para moverse a la posición deseada
+    //lineTo es para dibujar hasta la ubicación seleccionada
+    path.moveTo(0, size.height);
+    path.lineTo(0, size.height * 0.7);
+    //Primeras coordenadas son donde debe pasar la curvatura, y las segundas
+    //coordenadas es el punto final
+    path.quadraticBezierTo(
+        size.width / 4, size.height * 0.6, size.width / 2, size.height * 0.7);
+    path.quadraticBezierTo(
+        size.width * 3 / 4, size.height * 0.8, size.width, size.height * 0.7);
+    path.lineTo(size.width, size.height);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
