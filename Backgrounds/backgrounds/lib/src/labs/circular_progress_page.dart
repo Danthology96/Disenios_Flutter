@@ -17,7 +17,6 @@ class _CircularProgressPageState extends State<CircularProgressPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 800),
@@ -29,11 +28,11 @@ class _CircularProgressPageState extends State<CircularProgressPage>
         percentage = lerpDouble(percentage, newPercentage, controller.value)!;
       });
     });
+    super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }
