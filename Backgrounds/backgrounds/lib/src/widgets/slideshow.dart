@@ -105,12 +105,10 @@ class _Dot extends StatelessWidget {
     }
 
     return AnimatedContainer(
-      //TODO: Tarea
       duration: Duration(milliseconds: 200),
       margin: EdgeInsets.symmetric(horizontal: 5),
       width: tamanio,
       height: tamanio,
-
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,
