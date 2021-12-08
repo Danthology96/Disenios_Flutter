@@ -19,7 +19,8 @@ class ThemeChanger with ChangeNotifier {
       case 1:
         _darkTheme = false;
         _customTheme = false;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light()
+            .copyWith(colorScheme: ColorScheme.light(secondary: Colors.pink));
         break;
 
       /// dark

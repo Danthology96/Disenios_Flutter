@@ -24,42 +24,50 @@ class PinterestPage extends StatelessWidget {
 class _PinterestMenuPosition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     final show = Provider.of<_MenuModel>(context).show;
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
+    if (screenWidth > 500) {
+      screenWidth = screenWidth - 250;
+    }
 
     return Positioned(
         bottom: 30,
         child: Container(
           width: screenWidth,
-          child: Align(
-            child: PinterestMenu(
-              show: show,
-              activeColor: appTheme.colorScheme.secondary,
-              backgroundColor: appTheme.scaffoldBackgroundColor,
-              items: [
-                PinterestButton(
-                    onPressed: () {
-                      print('Icon pie_chart');
-                    },
-                    icon: Icons.pie_chart),
-                PinterestButton(
-                    onPressed: () {
-                      print('Icon search');
-                    },
-                    icon: Icons.search),
-                PinterestButton(
-                    onPressed: () {
-                      print('Icon notifications');
-                    },
-                    icon: Icons.notifications),
-                PinterestButton(
-                    onPressed: () {
-                      print('Icon supervised_user_circle');
-                    },
-                    icon: Icons.supervised_user_circle),
-              ],
-            ),
+          child: Row(
+            children: [
+              Spacer(),
+              PinterestMenu(
+                show: show,
+                activeColor: appTheme.colorScheme.secondary,
+                backgroundColor: appTheme.scaffoldBackgroundColor,
+                items: [
+                  PinterestButton(
+                      onPressed: () {
+                        print('Icon pie_chart');
+                      },
+                      icon: Icons.pie_chart),
+                  PinterestButton(
+                      onPressed: () {
+                        print('Icon search');
+                      },
+                      icon: Icons.search),
+                  PinterestButton(
+                      onPressed: () {
+                        print('Icon notifications');
+                      },
+                      icon: Icons.notifications),
+                  PinterestButton(
+                      onPressed: () {
+                        print('Icon supervised_user_circle');
+                      },
+                      icon: Icons.supervised_user_circle),
+                ],
+              ),
+              Spacer(),
+            ],
           ),
         ));
   }
@@ -95,14 +103,19 @@ class _PinterestGridState extends State<PinterestGrid> {
   @override
   Widget build(BuildContext context) {
     final List<int> items = List.generate(200, (index) => index);
-
+    int count;
+    if (MediaQuery.of(context).size.width > 500) {
+      count = 3;
+    } else {
+      count = 2;
+    }
     return new StaggeredGridView.countBuilder(
       controller: controller,
-      crossAxisCount: 4,
+      crossAxisCount: count,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) => _PinterestItem(index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 3),
+          new StaggeredTile.count(1, index.isEven ? 1 : 2),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );
