@@ -198,25 +198,32 @@ class _CurveHeaderPainter extends CustomPainter {
 }
 
 class WaveHeader extends StatelessWidget {
+  final Color color;
+
+  const WaveHeader({Key? key, required this.color}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: double.infinity,
       child: CustomPaint(
-        painter: _WaveHeaderPainter(),
+        painter: _WaveHeaderPainter(color),
       ),
     );
   }
 }
 
 class _WaveHeaderPainter extends CustomPainter {
+  final Color color;
+
+  _WaveHeaderPainter(this.color);
   @override
   void paint(Canvas canvas, Size size) {
     //El lapiz que se usará para pintar
     final paint = Paint();
 
-    paint.color = Color(0xff615AAB);
+    paint.color = color;
     paint.style =
         PaintingStyle.fill; //.fill es para rellenar ,stroke para bordes
     paint.strokeWidth = 2.0;
